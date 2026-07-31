@@ -15,13 +15,13 @@ export default function ThemeD() {
         let tl = gsap.timeline();
         const rotation = (id) => {
             if (id % 2) {
-                return 5;
+                return Math.random()*5;
             } else {
-                return -5;
+                return Math.random()*-5;
             }
         };
         const from = (rotation) => {
-          if (rotation == -5) {
+          if (rotation < 0) {
             return 2000
           } else {
             return -2000
@@ -38,7 +38,7 @@ export default function ThemeD() {
                     delay: 1,
                 },
                 {
-                    x: 100,
+                    x: 0,
                     y: 0,
                     rotate: rotation(image.id),
                     duration: 2,
@@ -49,15 +49,15 @@ export default function ThemeD() {
 
     return (
         <AppLayout>
-            <div className="m-10">
+            <div className="flex">
+                <div  className="w-full min-h-full  overflow-x-clip flex flex-col items-center justify-start pt-10 ">
                 {images.map((image) => (
-                    <div key={image.id} className="absolute mb-10 flex flex-col items-center justify-center">
-                        <div className={`img-${image.id}`}>
-                            <img src={image.content} alt="" width={900} height={900} className="rounded-[5px] border-3 border-white" />
+                        <div key={image.id} className={`img-${image.id} fixed`}>
+                            <img src={image.content} alt="" className="rounded-[5px] border-3 h-[70vh] border-white" />
                             <p className="">{image.name}</p>
                         </div>
-                    </div>
                 ))}
+                </div>
             </div>
         </AppLayout>
     );
