@@ -48,7 +48,7 @@ export default function UploadPhotos() {
     };
     return (
         <AppLayout>
-            <div className="m-10">
+            <div className="m-10 max-w-screen">
                 <p className="mb-3">Drag or Drop Photos Here !</p>
                 <FileUploader
                     handleChange={handleChange}
@@ -74,7 +74,6 @@ export default function UploadPhotos() {
                             <Reorder.Item 
                             key={file.id} 
                             value={file} 
-                            // dragControls={controls} 
                             dragListener={true} 
                             className='relative border border-gray-400 p-2 w-50 rounded-2xl'>
 

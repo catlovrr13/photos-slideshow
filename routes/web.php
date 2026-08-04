@@ -40,7 +40,11 @@ Route::middleware(['auth'])->group(function () {
         return Inertia::render('slideshow/theme-g');
     })->name('theme-g');
 
-        Route::get('upload-photos', function () {
+    Route::get('theme-h', function () {
+        return Inertia::render('slideshow/theme-h');
+    })->name('theme-h');
+
+    Route::get('upload-photos', function () {
         return Inertia::render('slideshow/upload-photos');
     })->name('upload-photos');
 });

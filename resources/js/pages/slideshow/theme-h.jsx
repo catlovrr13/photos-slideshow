@@ -1,10 +1,10 @@
 import AppLayout from '@/layouts/app-layout'
 import React from 'react'
 
-export default function ThemeG() {
+export default function ThemeH() {
   return (
     <AppLayout>
-        <div>ThemeG</div>
+        <div>ThemeH</div>
     </AppLayout>
   )
 }

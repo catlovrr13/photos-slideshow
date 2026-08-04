@@ -20,6 +20,9 @@ export default function ThemeB() {
           transitionTime={200}
           dynamicHeight={false}
           showArrows={true}
+          showThumbs={false}
+          showStatus={false}
+          showIndicators={false}
           useKeyboardArrows={true}
           width={500}
           infiniteLoop={true}
@@ -27,8 +30,8 @@ export default function ThemeB() {
           className='flex flex-wrap w-300 justify-center items-center'
           >
           {images.map((image) => (
-            <div key={image.id} className='flex justify-center items-center flex-col mb-10'>
-              <img src={image.content} alt="" width={500} height={500}/>
+            <div key={image.id} className='flex justify-center items-center flex-col mb-10 w-full h-full'>
+              <img src={image.content} alt="" width={900} height={900}/>
               <p className="font-black mt-5 ">{image.name}</p>
             </div>
           ))}

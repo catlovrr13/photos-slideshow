@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { Carousel } from "react-responsive-carousel"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 
-
 export default function ThemeC() {
     const [images, setImages] = useState([]);
   
@@ -18,22 +17,25 @@ export default function ThemeC() {
           <Carousel
           axis='vertical'
           autoPlay={true}
-          interval={1000}
-          transitionTime={100}
-          dynamicHeight={true}
+          interval={2000}
+          transitionTime={600}
+          dynamicHeight={false}
           showArrows={true}
+          showThumbs={false}
+          showStatus={false}
+          showIndicators={false}
           useKeyboardArrows={true}
           width={550}
           infiniteLoop={true}
           swipeable={false}
-          centerMode={true}
-          centerSlidePercentage={100}
           className='flex flex-wrap w-300 justify-center items-center'
           >
           {images.map((image) => (
             <div key={image.id} className='flex justify-center items-center flex-col mb-10'>
               <img src={image.content} alt="" width={500} height={500}/>
-              <p className="font-black mt-1">{image.name}</p>
+              <p className="font-black mt-1">
+                {image.name}
+              </p>
             </div>
           ))}
           </Carousel>

@@ -54,7 +54,7 @@ export default function ThemeD() {
                 {images.map((image) => (
                         <div key={image.id} className={`img-${image.id} fixed`}>
                             <img src={image.content} alt="" className="rounded-[5px] border-3 h-[70vh] border-white" />
-                            <p className="">{image.name}</p>
+                            <p className="bg-white text-black p-1">{image.name}</p>
                         </div>
                 ))}
                 </div>

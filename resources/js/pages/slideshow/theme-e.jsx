@@ -4,7 +4,7 @@ import React from 'react'
 export default function ThemeE() {
   return (
     <AppLayout>
-        <div>ThemeE</div>
+      <div>ThemeE</div>
     </AppLayout>
   )
 }
