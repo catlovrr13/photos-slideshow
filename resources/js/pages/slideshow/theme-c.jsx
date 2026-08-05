@@ -1,45 +1,71 @@
-import AppLayout from '@/layouts/app-layout'
-import React, { useEffect, useState } from 'react'
-import { Carousel } from "react-responsive-carousel"
-import "react-responsive-carousel/lib/styles/carousel.min.css"
+import AppLayout from '@/layouts/app-layout';
+import { useEffect, useState } from 'react';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 export default function ThemeC() {
     const [images, setImages] = useState([]);
-  
+    const [current, setCurrent] = useState(0);
+    const [mode, setMode] = useState('Autoplay');
+
     useEffect(() => {
-      if (localStorage.getItem("images-uploaded")) {
-        setImages(JSON.parse(localStorage.getItem("images-uploaded")))
-      }
-    }, [])
-  return (
-    <AppLayout>
-        <div className='m-10'>
-          <Carousel
-          axis='vertical'
-          autoPlay={true}
-          interval={2000}
-          transitionTime={600}
-          dynamicHeight={false}
-          showArrows={true}
-          showThumbs={false}
-          showStatus={false}
-          showIndicators={false}
-          useKeyboardArrows={true}
-          width={550}
-          infiniteLoop={true}
-          swipeable={false}
-          className='flex flex-wrap w-300 justify-center items-center'
-          >
-          {images.map((image) => (
-            <div key={image.id} className='flex justify-center items-center flex-col mb-10'>
-              <img src={image.content} alt="" width={500} height={500}/>
-              <p className="font-black mt-1">
-                {image.name}
-              </p>
+        if (localStorage.getItem('play-mode')) {
+            setMode(localStorage.getItem('play-mode'));
+        }
+    }, []);
+
+    useEffect(() => {
+        if (localStorage.getItem('images-uploaded')) {
+            setImages(JSON.parse(localStorage.getItem('images-uploaded')));
+        }
+    }, []);
+
+    useEffect(() => {
+        if (images.length < 2) return;
+        if (mode === 'Manual') return;
+
+        const id = setInterval(() => {
+            setCurrent((prev) => {
+                if (mode === 'Random') {
+                    return Math.floor(Math.random() * images.length);
+                }
+                return (prev + 1) % images.length;
+            });
+        }, 2000);
+
+        return () => clearInterval(id);
+    }, [images.length, mode]);
+    return (
+        <AppLayout>
+            <div className="m-10 flex items-center justify-center">
+                <Carousel
+                    selectedItem={current}
+                    onChange={(index) => setCurrent(index)}
+                    axis="vertical"
+                    autoPlay={false}
+                    interval={2000}
+                    transitionTime={600}
+                    dynamicHeight={false}
+                    showArrows={true}
+                    showThumbs={false}
+                    showStatus={false}
+                    showIndicators={false}
+                    useKeyboardArrows={true}
+                    width={1000}
+                    infiniteLoop={true}
+                    swipeable={true}
+                    className="flex w-300 h-auto flex-wrap"
+                >
+                    {images.map((image) => (
+                        <div key={image.id} className="flex flex-col items-center justify-center">
+                            <div className="w-full h-[550px] overflow-hidden">
+                                <img src={image.content} alt="" className="w-full h-full object-cover" />
+                            </div>
+                            <p className="mt-1 font-black">{image.name}</p>
+                        </div>
+                    ))}
+                </Carousel>
             </div>
-          ))}
-          </Carousel>
-        </div>
-    </AppLayout>
-  )
+        </AppLayout>
+    );
 }

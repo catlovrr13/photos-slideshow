@@ -4,6 +4,13 @@ import { useEffect, useState } from 'react';
 
 export default function ThemeD() {
     const [images, setImages] = useState([]);
+    const [mode, setMode] = useState('Autoplay');
+
+    useEffect(() => {
+        if (localStorage.getItem('play-mode')) {
+            setMode(localStorage.getItem('play-mode'));
+        }
+    }, []);
 
     useEffect(() => {
         if (localStorage.getItem('images-uploaded')) {
@@ -15,18 +22,18 @@ export default function ThemeD() {
         let tl = gsap.timeline();
         const rotation = (id) => {
             if (id % 2) {
-                return Math.random()*5;
+                return Math.random() * 5;
             } else {
-                return Math.random()*-5;
+                return Math.random() * -5;
             }
         };
         const from = (rotation) => {
-          if (rotation < 0) {
-            return 2000
-          } else {
-            return -2000
-          }
-        }
+            if (rotation < 0) {
+                return 2000;
+            } else {
+                return -2000;
+            }
+        };
 
         images.forEach((image) => {
             tl.fromTo(
@@ -50,13 +57,13 @@ export default function ThemeD() {
     return (
         <AppLayout>
             <div className="flex">
-                <div  className="w-full min-h-full  overflow-x-clip flex flex-col items-center justify-start pt-10 ">
-                {images.map((image) => (
+                <div className="flex min-h-full w-full flex-col items-center justify-start overflow-x-clip pt-10">
+                    {images.map((image) => (
                         <div key={image.id} className={`img-${image.id} fixed`}>
-                            <img src={image.content} alt="" className="rounded-[5px] border-3 h-[70vh] border-white" />
-                            <p className="bg-white text-black p-1">{image.name}</p>
+                            <img src={image.content} alt="" className="h-[70vh] rounded-[5px] border-3 border-white" />
+                            <p className="bg-white p-1 text-black">{image.name}</p>
                         </div>
-                ))}
+                    ))}
                 </div>
             </div>
         </AppLayout>

@@ -8,7 +8,7 @@ import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Upload Images',
+        title: 'Config Panel',
         url: '/upload-photos',
         icon: CameraIcon,
     },
