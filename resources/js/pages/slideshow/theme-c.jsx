@@ -35,6 +35,7 @@ export default function ThemeC() {
 
         return () => clearInterval(id);
     }, [images.length, mode]);
+    
     return (
         <AppLayout>
             <div className="m-10 flex items-center justify-center">
