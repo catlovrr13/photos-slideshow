@@ -2,7 +2,6 @@ import AppLayout from '@/layouts/app-layout';
 import { useEffect, useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import CommandBar from './command-bar';
 
 export default function ThemeA() {
     const [images, setImages] = useState([]);
@@ -16,6 +15,10 @@ export default function ThemeA() {
     }, []);
 
     useEffect(() => {
+        localStorage.setItem('selected-theme', 'A');
+    }, []);
+
+    useEffect(() => {
         if (localStorage.getItem('images-uploaded')) {
             setImages(JSON.parse(localStorage.getItem('images-uploaded')));
         }
@@ -23,14 +26,14 @@ export default function ThemeA() {
 
     useEffect(() => {
         if (images.length < 2) return;
-        if (mode === "Manual") return;
+        if (mode === 'Manual') return;
 
         const id = setInterval(() => {
             setCurrent((prev) => {
-              if (mode === "Random") {
-                return Math.floor(Math.random() * images.length)
-              }
-              return (prev + 1) % images.length
+                if (mode === 'Random') {
+                    return Math.floor(Math.random() * images.length);
+                }
+                return (prev + 1) % images.length;
             });
         }, 2000);
 
@@ -39,7 +42,7 @@ export default function ThemeA() {
 
     return (
         <AppLayout>
-            <div className="h-full w-full overflow-hidden flex items-center justify-center">
+            <div className="flex h-full w-full items-center justify-center overflow-hidden">
                 <Carousel
                     selectedItem={current}
                     onChange={(index) => setCurrent(index)}

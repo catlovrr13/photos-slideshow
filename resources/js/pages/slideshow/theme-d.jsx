@@ -13,6 +13,10 @@ export default function ThemeD() {
     }, []);
 
     useEffect(() => {
+        localStorage.setItem('selected-theme', 'D');
+    }, []);
+
+    useEffect(() => {
         if (localStorage.getItem('images-uploaded')) {
             setImages(JSON.parse(localStorage.getItem('images-uploaded')));
         }

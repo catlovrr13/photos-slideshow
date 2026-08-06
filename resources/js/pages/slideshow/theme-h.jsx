@@ -14,6 +14,10 @@ export default function ThemeH() {
     }, []);
 
     useEffect(() => {
+        localStorage.setItem('selected-theme', 'H');
+    }, []);
+
+    useEffect(() => {
         if (localStorage.getItem('images-uploaded')) {
             setImages(JSON.parse(localStorage.getItem('images-uploaded')));
         }

@@ -1,11 +1,11 @@
 import AppLayout from '@/layouts/app-layout';
+import { router } from '@inertiajs/react';
 import { Reorder, useDragControls } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
 
 const fileTypes = ['png', 'jpeg', 'jpg', 'heic', 'svg'];
 const modes = ['Manual', 'Autoplay', 'Random'];
-
 
 export default function UploadPhotos() {
     const [files, setFiles] = useState([]);
@@ -60,6 +60,60 @@ export default function UploadPhotos() {
             reader.readAsDataURL(images[i]);
         }
     };
+
+    const exportData = () => {
+        const data = {
+            images: JSON.parse(localStorage.getItem('images-uploaded') || '[]'),
+            mode: localStorage.getItem('play-mode') || 'Autoplay',
+            theme: localStorage.getItem('selected-theme') || 'A',
+        };
+
+        const json = JSON.stringify(data);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        const now = new Date();
+        const timestamp = now.toISOString().replace(/[:.]/g, '-');
+        const filename = `slideshow-${timestamp}.json`;
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(url);
+    };
+
+    const importData = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            try {
+                const data = JSON.parse(reader.result);
+                setFiles(data.images || []);
+                setMode(data.mode || 'Autoplay');
+                localStorage.setItem('images-uploaded', JSON.stringify(data.images || []));
+                localStorage.setItem('play-mode', data.mode || 'Autoplay');
+                localStorage.setItem('selected-theme', data.theme || 'A');
+
+                router.visit(`/theme-${(data.theme || 'A').toLowerCase()}`);
+            } catch (err) {
+                console.error('Invalid slideshow file', err);
+            }
+        };
+        reader.readAsText(file);
+        e.target.value = '';
+    };
+
+    const resetSlideshow = () => {
+        setFiles([]);
+        setMode('Autoplay');
+        localStorage.removeItem('images-uploaded');
+        localStorage.removeItem('play-mode');
+        localStorage.removeItem('selected-theme');
+    };
+
     return (
         <AppLayout>
             <div className="h-screen w-full">
@@ -82,6 +136,21 @@ export default function UploadPhotos() {
                             {m}
                         </button>
                     ))}
+                </div>
+
+                <div className="mt-4 ml-3 flex gap-2">
+                    <button onClick={exportData} className="rounded border p-2">
+                        Export
+                    </button>
+
+                    <label className="cursor-pointer rounded border p-2">
+                        Import
+                        <input type="file" accept="application/json" onChange={importData} className="hidden" />
+                    </label>
+
+                    <button onClick={resetSlideshow} className="rounded border p-2 text-red-600">
+                        Reset
+                    </button>
                 </div>
                 <div className="m-3 flex flex-col gap-3">
                     <p>Images uploaded:</p>

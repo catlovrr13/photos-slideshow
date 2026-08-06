@@ -9,6 +9,11 @@ export default function ThemeF() {
             setImages(JSON.parse(localStorage.getItem('images-uploaded')));
         }
     }, []);
+
+        useEffect(() => {
+        localStorage.setItem('selected-theme', 'F');
+    }, []);
+
     return (
         <AppLayout>
             <div className='relative w-full h-full justify-center flex'>

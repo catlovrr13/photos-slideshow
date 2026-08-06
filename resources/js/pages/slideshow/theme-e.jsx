@@ -1,6 +1,6 @@
 import AppLayout from '@/layouts/app-layout';
+import gsap from 'gsap';
 import React, { useEffect, useState } from 'react';
-import gsap from "gsap"
 
 export default function ThemeE() {
     const [images, setImages] = useState([]);
@@ -12,33 +12,37 @@ export default function ThemeE() {
     }, []);
 
     useEffect(() => {
-      if (images.length < 2) return;
-      
-      const tl = gsap.timeline({repeat: -1})
+        localStorage.setItem('selected-theme', 'E');
+    }, []);
 
-      images.forEach((_, i) => {
-        gsap.set(`.left-door-${i}, .right-door-${i}`, {
-          rotationY: 0,
-          zIndex: images.length - i
-        })
-      })
+    useEffect(() => {
+        if (images.length < 2) return;
 
-      images.forEach((_,i) => {
-        const nextImg = (i + 1) % images.length
+        const tl = gsap.timeline({ repeat: -1 });
 
-        tl.to(`.left-door-${i}`, { rotationY: -110,  duration: 1}, "+=2")
-        tl.to(`.right-door-${i}`, { rotationY: 110,  duration: 1}, "<")
+        images.forEach((_, i) => {
+            gsap.set(`.left-door-${i}, .right-door-${i}`, {
+                rotationY: 0,
+                zIndex: images.length - i,
+            });
+        });
 
-        tl.set(`.left-door-${i}, .right-door-${i}`, { rotationY: 0, zIndex: 0 })
-        tl.set(`.left-door-${nextImg}, .right-door-${nextImg}`, { zIndex: images.length })
-      })
+        images.forEach((_, i) => {
+            const nextImg = (i + 1) % images.length;
 
-      return () => tl.kill()
-    }, [images])
+            tl.to(`.left-door-${i}`, { rotationY: -110, duration: 1 }, '+=2');
+            tl.to(`.right-door-${i}`, { rotationY: 110, duration: 1 }, '<');
+
+            tl.set(`.left-door-${i}, .right-door-${i}`, { rotationY: 0, zIndex: 0 });
+            tl.set(`.left-door-${nextImg}, .right-door-${nextImg}`, { zIndex: images.length });
+        });
+
+        return () => tl.kill();
+    }, [images]);
 
     return (
         <AppLayout>
-            <div className="h-full w-full overflow-hidden flex items-center justify-center">
+            <div className="flex h-full w-full items-center justify-center overflow-hidden">
                 <div className="relative" style={{ width: 850, height: 550, perspective: 1200 }}>
                     {images.map((image, i) => (
                         <React.Fragment key={i}>
@@ -53,7 +57,7 @@ export default function ThemeE() {
                                 className={`right-door-${i} absolute top-0 right-0 h-full w-1/2 overflow-hidden`}
                                 style={{ transformOrigin: 'right center' }}
                             >
-                                <img src={image.content} className="h-full max-w-none absolute right-0 object-cover" style={{ width: 850 }} />
+                                <img src={image.content} className="absolute right-0 h-full max-w-none object-cover" style={{ width: 850 }} />
                             </div>
                         </React.Fragment>
                     ))}

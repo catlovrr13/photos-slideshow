@@ -9,6 +9,10 @@ export default function ThemeG() {
             setImages(JSON.parse(localStorage.getItem('images-uploaded')));
         }
     }, []);
+
+        useEffect(() => {
+        localStorage.setItem('selected-theme', 'G');
+    }, []);
     return (
         <AppLayout>
             <div>
