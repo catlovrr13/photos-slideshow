@@ -38,8 +38,8 @@ export default function ThemeE() {
 
     return (
         <AppLayout>
-            <div className="m-10 flex justify-center">
-                <div className="relative" style={{ width: 900, height: 600, perspective: 1200 }}>
+            <div className="h-full w-full overflow-hidden flex items-center justify-center">
+                <div className="relative" style={{ width: 850, height: 550, perspective: 1200 }}>
                     {images.map((image, i) => (
                         <React.Fragment key={i}>
                             <div

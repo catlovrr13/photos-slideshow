@@ -38,7 +38,7 @@ export default function ThemeC() {
     
     return (
         <AppLayout>
-            <div className="m-10 flex items-center justify-center">
+            <div className="h-full w-full overflow-hidden flex items-center justify-center">
                 <Carousel
                     selectedItem={current}
                     onChange={(index) => setCurrent(index)}
@@ -55,7 +55,7 @@ export default function ThemeC() {
                     width={1000}
                     infiniteLoop={true}
                     swipeable={true}
-                    className="flex w-300 h-auto flex-wrap"
+                    className="flex flex-wrap"
                 >
                     {images.map((image) => (
                         <div key={image.id} className="flex flex-col items-center justify-center">
