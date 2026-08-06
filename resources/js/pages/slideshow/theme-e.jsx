@@ -46,14 +46,14 @@ export default function ThemeE() {
                                 className={`left-door-${i} absolute top-0 left-0 h-full w-1/2 overflow-hidden`}
                                 style={{ transformOrigin: 'left center' }}
                             >
-                                <img src={image.content} className="h-full max-w-none object-cover" style={{ width: 900 }} />
+                                <img src={image.content} className="h-full max-w-none object-cover" style={{ width: 850 }} />
                             </div>
 
                             <div
                                 className={`right-door-${i} absolute top-0 right-0 h-full w-1/2 overflow-hidden`}
                                 style={{ transformOrigin: 'right center' }}
                             >
-                                <img src={image.content} className="h-full max-w-none absolute right-0 object-cover" style={{ width: 900 }} />
+                                <img src={image.content} className="h-full max-w-none absolute right-0 object-cover" style={{ width: 850 }} />
                             </div>
                         </React.Fragment>
                     ))}
