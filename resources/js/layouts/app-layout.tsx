@@ -1,4 +1,5 @@
 import AppLayoutTemplate from '@/layouts/app/app-sidebar-layout';
+import CommandBar from '@/pages/slideshow/command-bar';
 import { type BreadcrumbItem } from '@/types';
 
 interface AppLayoutProps {
@@ -9,5 +10,6 @@ interface AppLayoutProps {
 export default ({ children, breadcrumbs, ...props }: AppLayoutProps) => (
     <AppLayoutTemplate breadcrumbs={breadcrumbs} {...props}>
         {children}
+    <CommandBar />
     </AppLayoutTemplate>
 );

@@ -6,6 +6,7 @@ import { FileUploader } from 'react-drag-drop-files';
 const fileTypes = ['png', 'jpeg', 'jpg', 'heic', 'svg'];
 const modes = ['Manual', 'Autoplay', 'Random'];
 
+
 export default function UploadPhotos() {
     const [files, setFiles] = useState([]);
     const controls = useDragControls();
@@ -15,7 +16,7 @@ export default function UploadPhotos() {
         if (localStorage.getItem('play-mode')) {
             setMode(localStorage.getItem('play-mode'));
         }
-    }, []);
+    }, [mode]);
 
     const changeMode = (newMode) => {
         setMode(newMode);

@@ -35,11 +35,11 @@ export default function ThemeD() {
             }
         };
 
-        images.forEach((image) => {
+        images.forEach((image, i) => {
             tl.fromTo(
-                `.img-${image.id}`,
+                `.img-${i}`,
                 {
-                    x: from(rotation(image.id)),
+                    x: from(rotation(i)),
                     y: 0,
                     rotate: 0,
                     delay: 1,
@@ -47,7 +47,7 @@ export default function ThemeD() {
                 {
                     x: 0,
                     y: 0,
-                    rotate: rotation(image.id),
+                    rotate: rotation(i),
                     duration: 2,
                 },
             );
@@ -58,8 +58,8 @@ export default function ThemeD() {
         <AppLayout>
             <div className="flex">
                 <div className="flex min-h-full w-full flex-col items-center justify-start overflow-x-clip pt-10">
-                    {images.map((image) => (
-                        <div key={image.id} className={`img-${image.id} fixed`}>
+                    {images.map((image, i) => (
+                        <div key={i} className={`img-${i} fixed`}>
                             <img src={image.content} alt="" className="h-[70vh] rounded-[5px] border-3 border-white" />
                             <p className="bg-white p-1 text-black">{image.name}</p>
                         </div>

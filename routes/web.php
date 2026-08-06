@@ -47,6 +47,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('upload-photos', function () {
         return Inertia::render('slideshow/upload-photos');
     })->name('upload-photos');
+
+    Route::get('command-bar', function () {
+        return Inertia::render('slideshow/command-bar');
+    })->name('command-bar');
 });
 
 require __DIR__ . '/settings.php';

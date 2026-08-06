@@ -11,9 +11,9 @@ export default function ThemeF() {
     }, []);
     return (
         <AppLayout>
-            <div>
+            <div className='relative w-full h-full justify-center flex'>
               {images.map((image) => (
-                        <div key={image.id} className="flex flex-col items-center justify-center">
+                        <div key={image.id} className="flex absolute flex-col items-center justify-center">
                             <img src={image.content} alt="" width={500} height={400} />
                             <p className="mt-5 font-black">{image.name}</p>
                         </div>
